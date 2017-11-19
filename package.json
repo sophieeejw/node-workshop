@@ -1,0 +1,19 @@
+{
+  "name": "workshop",
+  "version": "1.0.0",
+  "description": "node girls project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sophieeejw/node-workshop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sophieeejw/node-workshop/issues"
+  },
+  "homepage": "https://github.com/sophieeejw/node-workshop#readme"
+}
