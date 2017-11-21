@@ -1,5 +1,6 @@
 var fs = require('fs');
 var querystring = require('querystring');
+var posts = require('./posts.json')
 
 function handler(request, response) {
 
@@ -15,7 +16,7 @@ function handler(request, response) {
         }
       response.writeHead(200, {'Content-Type': 'text/html'});
       //why extensionType[extension] doesnt work?
-
+      // console.log('tell me dirname',__dirname);
     response.end(file);
   });
 
@@ -27,9 +28,21 @@ function handler(request, response) {
     request.on ('end', function () {
       var convertedData = querystring.parse(allTheData);
       console.log(convertedData);
+      fs.writeFile(__dirname + '/posts.json', JSON.stringify(convertedData),
+      function(error) {
+        if (error) {
+          console.log('oh there is an error', error);
+          return;
+        }
       response.writeHead(302, {Location : "/"});
       response.end();
     });
+});
+//problematic part
+} else if (endpoint === '/posts') {
+    response.writeHead(200, {'Content-Type' : 'application/json'});
+    response.end(JSON.stringify(posts));
+
 
 } else {
   const extension = request.url.split('.')[1];
@@ -50,9 +63,7 @@ function handler(request, response) {
     response.end(file);
   });
 
-
-  }
-
+}
 
 }
 
