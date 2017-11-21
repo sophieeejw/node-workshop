@@ -22,13 +22,17 @@ function handler(request, response) {
 
 } else if (endpoint === '/create/post') {
     var allTheData = '';
+    var timeStamp = Date.now();
     request.on ('data', function (chunkOfData){
       allTheData += chunkOfData;
     });
     request.on ('end', function () {
-      var convertedData = querystring.parse(allTheData);
-      console.log(convertedData);
-      fs.writeFile(__dirname + '/posts.json', JSON.stringify(convertedData),
+      var convertedData = querystring.parse(allTheData).post;
+      //here is the part!!!
+      filePath = __dirname + '/posts.json';
+      posts[timeStamp] = convertedData;
+      //line above was the key!!
+      fs.writeFile(filePath,JSON.stringify(posts),
       function(error) {
         if (error) {
           console.log('oh there is an error', error);
